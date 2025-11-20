@@ -13,18 +13,25 @@ import org.springframework.context.annotation.Configuration;
 @Configuration // 설정 정보를 관리하는 파일에서 @Configuration 작성
 public class AppConfig { // 애플리케이션 전체를 설정하고 구성한다
 
+    // Bean memberService -> new MemoryMemberRepository(); 호출
+    // Bean orderService -> new MemoryMemberRepository(); 호출
+    // 싱글톤이 깨지는 것은 아닌지 ->
+
     @Bean // Bean: 스프링 컨테이너에 등록
     public MemberService memberService() {
+        System.out.println("call AppConfig.memberService");
         return new MemberServiceImpl(memberRepository()); // 생성자 주입
     }
 
     @Bean
     public MemoryMemberRepository memberRepository() {
+        System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
     @Bean
     public OrderService orderService() {
+        System.out.println("call AppConfig.orderService");
         return new OrderServiceImpl(
                 memberRepository(), discountPolicy()
         );
