@@ -15,23 +15,21 @@ public class AppConfig { // 애플리케이션 전체를 설정하고 구성한�
 
     // Bean memberService -> new MemoryMemberRepository(); 호출
     // Bean orderService -> new MemoryMemberRepository(); 호출
-    // 싱글톤이 깨지는 것은 아닌지 ->
+    // 싱글톤이 깨지는 것은 아닌지 -> @Configuration를 붙이면 바이트코드를 조작하는 CGLIB 기술을 사용해서 싱글톤을 보장
+    // AppConfig를 bean으로 등록하고 getClass()한 결과: AppConfig$$SpringCGLIB$$0
 
     @Bean // Bean: 스프링 컨테이너에 등록
     public MemberService memberService() {
-        System.out.println("call AppConfig.memberService");
         return new MemberServiceImpl(memberRepository()); // 생성자 주입
     }
 
     @Bean
     public MemoryMemberRepository memberRepository() {
-        System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
     @Bean
     public OrderService orderService() {
-        System.out.println("call AppConfig.orderService");
         return new OrderServiceImpl(
                 memberRepository(), discountPolicy()
         );
