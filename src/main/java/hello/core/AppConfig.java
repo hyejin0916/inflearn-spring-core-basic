@@ -10,7 +10,7 @@ import hello.core.order.OrderServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration // 설정 정보를 관리하는 파일에서 @Configuration 작성
+@Configuration // 스프링에게 이 클래스가 빈(객체)을 만드는 설정 클래스임을 알려주는 어노테이션
 public class AppConfig { // 애플리케이션 전체를 설정하고 구성한다
 
     // Bean memberService -> new MemoryMemberRepository(); 호출
