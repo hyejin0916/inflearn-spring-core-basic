@@ -1,5 +1,8 @@
 package hello.core.lifecycle;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+
 public class NetworkClient {
     // InitializingBean: 초기화 빈
 
@@ -30,6 +33,7 @@ public class NetworkClient {
         System.out.println("close: " + url);
     }
 
+    @PostConstruct
     public void init() {
         // afterPropertiesSet: 의존관계 주입이 끝나면 호출해주겠다.
         System.out.println("NetworkClient.init");
@@ -37,6 +41,7 @@ public class NetworkClient {
         call("초기화 연결 메세지");
     }
 
+    @PreDestroy
     public void close() {
         // destroy: 빈이 종료될 때 호출
         System.out.println("NetworkClient.close");
